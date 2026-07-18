@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">NMedia</string>
     <string name="nmedia">NMedia</string>
-    <string name="description_post_author_avatar">Post author avatar</string>
+    <string name="description_post_author_avatar" translatable="false">Post author avatar</string>
     <string name="description_post_menu" translatable="false">Menu</string>
     <string name="description_post_like" translatable="false">Like</string>
     <string name="description_post_share" translatable="false">Share</string>
