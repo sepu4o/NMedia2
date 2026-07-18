@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">NMedia</string>
     <string name="nmedia">NMedia</string>
     <string name="description_post_author_avatar">Post author avatar</string>
-    <string name="description_post_menu">Menu</string>
-    <string name="description_post_like">Like</string>
-    <string name="description_post_share">Share</string>
+    <string name="description_post_menu" translatable="false">Menu</string>
+    <string name="description_post_like" translatable="false">Like</string>
+    <string name="description_post_share" translatable="false">Share</string>
 </resources>
