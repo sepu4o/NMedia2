@@ -17,7 +17,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/barrier_header"
         android:contentDescription="@string/description_post_author_avatar"
-        tools:src="@sample/posts_avatars" />
+        android:src="@drawable/ic_launcher_foreground" />
+
 
     <TextView
         android:id="@+id/author"
@@ -25,11 +26,11 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/padding"
         android:singleLine="true"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="@id/avatar"
         app:layout_constraintBottom_toTopOf="@+id/published"
-        app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintEnd_toStartOf="@id/menu"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="@sample/posts.json/data/author" />
 
 
@@ -60,16 +61,16 @@
         app:constraint_referenced_ids="avatar,published,menu"
         app:barrierDirection="bottom"/>
 
+
     <TextView
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding"
-        android:layout_marginTop="@dimen/padding"
+        android:layout_marginTop="20dp"
         android:autoLink="web"
         app:layout_constraintTop_toBottomOf="@id/barrier_header"
+        tools:layout_editor_absoluteX="-55dp"
         tools:text="@sample/posts.json/data/content" />
-
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_content"
@@ -77,6 +78,7 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="content"
         app:barrierDirection="bottom"/>
+
 
     <ImageButton
         android:id="@+id/like"
