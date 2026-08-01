@@ -6,8 +6,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+//import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.R
+import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
+import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.formatCount
 import ru.netology.nmedia.viewmodel.PostViewModel
 
@@ -29,28 +32,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        viewModel.data.observe(this) { post ->
-            with(binding) {
-                author.text = post.author
-                published.text = post.published
-                content.text = post.content
-                countLikes.text = formatCount(post.likes)
-                countShare.text = formatCount(post.share)
-                countView.text = formatCount(post.view)
-                like.setImageResource(if (post.likeByMe) R.drawable.like_svgrepo_com__1_ else R.drawable.like_svgrepo_com)
-            }
+            val adapter = PostsAdapter(
+                likeClickListener = {
+                    viewModel.likeById(it.id)
+                },
+                        shareClickListener = {
+                    viewModel.shareById(it.id)
+                }
+            )
+            binding.main.adapter = adapter
+
+        viewModel.data.observe(this) { posts ->
+            adapter.submitList(posts)
         }
 
-        binding.like.setOnClickListener {
-            viewModel.like()
-        }
-
-        binding.share.setOnClickListener {
-            viewModel.share()
-        }
-
-        binding.root.setOnClickListener { println("Клик по root") }
-
-        binding.avatar.setOnClickListener { println("Клик по аватару") }
     }
 }
