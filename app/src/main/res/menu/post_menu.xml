@@ -6,5 +6,5 @@
 
     <item
         android:id="@+id/edit"
-        android:title = "@string/edite"/>
+        android:title = "@string/edit"/>
 </menu>
