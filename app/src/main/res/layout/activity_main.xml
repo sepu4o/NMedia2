@@ -1,12 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:listitem="@layout/card_post"
-    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:context=".activity.MainActivity">
 
-</androidx.recyclerview.widget.RecyclerView>
+    <!-- ==================== СПИСОК ПОСТОВ ==================== -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/editingBarrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/card_post" />
+
+    <!-- ==================== ПАНЕЛЬ РЕДАКТИРОВАНИЯ ==================== -->
+    <!-- Виртуальная группа: управляет видимостью всех элементов панели -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/editingGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="editingLabel,editingContent,cancelButton" />
+
+    <!-- Barrier: двигается по верхней границе панели -->
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/editingBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="editingLabel,editingContent,cancelButton" />
+
+    <!-- Заголовок "Edit Message" -->
+    <TextView
+        android:id="@+id/editingLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginTop="8dp"
+        android:text="@string/edit_message"
+        android:textColor="?attr/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/cancelButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/list" />
+
+    <!-- Текст редактируемого поста (превью) -->
+    <TextView
+        android:id="@+id/editingContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="?android:attr/textColorSecondary"
+        app:layout_constraintBottom_toTopOf="@id/content"
+        app:layout_constraintEnd_toStartOf="@id/cancelButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editingLabel"
+        tools:text="Нетология" />
+
+    <!-- Кнопка отмены (крестик) -->
+    <ImageButton
+        android:id="@+id/cancelButton"
+        android:layout_width="@dimen/image_size"
+        android:layout_height="@dimen/image_size"
+        android:layout_marginEnd="@dimen/padding"
+        android:padding="12dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/cancel_edit"
+        android:src="@drawable/cross_circle_svgrepo_com"
+        app:layout_constraintBottom_toBottomOf="@id/editingContent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/editingLabel" />
+
+    <!-- ==================== ПОЛЕ ВВОДА ==================== -->
+    <EditText
+        android:id="@+id/content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:hint="@string/post_text"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine"
+        android:padding="@dimen/padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/editingBarrier"/>
+
+    <!-- Кнопка сохранения (галочка) -->
+    <ImageButton
+        android:id="@+id/save"
+        android:layout_width="@dimen/image_size"
+        android:layout_height="@dimen/image_size"
+        android:layout_marginEnd="@dimen/padding"
+        android:padding="12dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/save"
+        android:src="@drawable/outline_check_circle_24"
+        app:tint="?colorControlNormal"
+        app:layout_constraintBottom_toBottomOf="@id/content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/content"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

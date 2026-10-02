@@ -5,4 +5,13 @@
     <string name="description_post_menu" translatable="false">Menu</string>
     <string name="description_post_like" translatable="false">Like</string>
     <string name="description_post_share" translatable="false">Share</string>
+    <string name="remove">Удалить</string>
+    <string name="content">Текст</string>
+    <string name= "edite" >Редактировать</string>
+    <string name="text_is_blank">Пустой текст</string>
+    <string name="error_empty_text">Пустой текст</string>
+     <string name="edit_message">Редактировать текст</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel_edit">Отмена редактирования</string>
+    <string name="post_text">Текст поста</string>
 </resources>

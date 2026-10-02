@@ -11,13 +11,13 @@
 
     <ImageView
         android:id="@+id/avatar"
-        android:layout_width="124dp"
-        android:layout_height="124dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/barrier_header"
         android:contentDescription="@string/description_post_author_avatar"
-        android:src="@drawable/ic_launcher_foreground" />
+        android:src="@drawable/netology_logo"/>
 
 
     <TextView

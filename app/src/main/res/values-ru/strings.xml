@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="nmedia">НМедиа</string>
-    
+    <string name="remove">Удалить</string>
+    <string name="content">Текст</string>
+    <string name="error_empty_text">Пустой текст</string>
+    <string name="edite">Редактировать</string>
+
+
 </resources>
