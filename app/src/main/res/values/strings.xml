@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name" translatable="false">NMedia</string>
-    <string name="nmedia">NMedia</string>
+    <string name="NMedia">NMedia</string>
     <string name="description_post_author_avatar" translatable="false">Post author avatar</string>
     <string name="description_post_menu" translatable="false">Menu</string>
     <string name="description_post_like" translatable="false">Like</string>
     <string name="description_post_share" translatable="false">Share</string>
-    <string name="remove">Удалить</string>
-    <string name="content">Текст</string>
-    <string name= "edite" >Редактировать</string>
-    <string name="text_is_blank">Пустой текст</string>
-    <string name="error_empty_text">Пустой текст</string>
-     <string name="edit_message">Редактировать текст</string>
-    <string name="save">Сохранить</string>
-    <string name="cancel_edit">Отмена редактирования</string>
-    <string name="post_text">Текст поста</string>
+    <string name="remove">Remove</string>
+    <string name="content">Content</string>
+    <string name="edit">Edit</string>
+    <string name="text_is_blank">Text is blank</string>
+    <string name="error_empty_text">Text is blank</string>
+    <string name="edit_message">Edit Message</string>
+    <string name="save">Save</string>
+    <string name="cancel_edit">Cancel edit</string>
+    <string name="post_text">Post text</string>
 </resources>
