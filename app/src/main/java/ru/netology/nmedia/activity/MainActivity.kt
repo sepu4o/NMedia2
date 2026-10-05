@@ -28,13 +28,15 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val isImeVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
             v.setPadding(
-                systemBars.left + v.paddingLeft,
-                systemBars.top + v.paddingTop,
-                systemBars.right + v.paddingRight,
-                systemBars.bottom + v.paddingBottom
+                v.paddingLeft,
+                systemBars.top,
+                v.paddingRight,
+                if (isImeVisible) imeInsets.bottom else systemBars.bottom
             )
             insets
         }
@@ -63,8 +65,8 @@ class MainActivity : AppCompatActivity() {
         // ==================== ПОДПИСКА НА СПИСОК ====================
         viewModel.data.observe(this) { posts ->
             val isNewPost = posts.size > adapter.currentList.size
-            adapter.submitList(posts){
-                if(isNewPost)
+            adapter.submitList(posts) {
+                if (isNewPost)
                     binding.list.smoothScrollToPosition(0)
             }
         }
