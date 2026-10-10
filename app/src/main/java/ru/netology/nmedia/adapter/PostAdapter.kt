@@ -47,10 +47,10 @@ class PostViewHolder(private val binding : CardPostBinding,
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            countLikes.text = AndroidUtils.formatCount(post.likes)
-            countShare.text = AndroidUtils.formatCount(post.share)
             countView.text = AndroidUtils.formatCount(post.view)
-            like.setImageResource(if (post.likedByMe) R.drawable.like_svgrepo_com__1_ else R.drawable.like_svgrepo_com)
+            like.isChecked = post.likedByMe
+            like.text = AndroidUtils.formatCount(post.likes)
+            share.text = AndroidUtils.formatCount(post.share)
             like.setOnClickListener {
                 listener.onlike(post)
             }

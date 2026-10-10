@@ -44,13 +44,14 @@
         app:layout_constraintTop_toBottomOf="@id/author"
         tools:text="@sample/posts.json/data/published" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/menu"
+        style="@style/Widget.AppTheme.MenuButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:contentDescription="@string/description_post_menu"
-        android:src="@drawable/baseline_more_vert_24"
+        app:icon="@drawable/baseline_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="?attr/colorControlNormal" />
@@ -81,51 +82,37 @@
         app:constraint_referenced_ids="content" />
 
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
+        style="@style/Widget.AppTheme.LikeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checkable="true"
         android:layout_marginVertical="@dimen/padding"
         android:background="@android:color/transparent"
+        android:text="199"
         android:contentDescription="Like"
-        android:src="@drawable/like_svgrepo_com"
+        app:icon="@drawable/ic_like_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier_content"
         app:tint="?attr/colorControlNormal" />
 
-    <TextView
-        android:id="@+id/countLikes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/like"
-        app:layout_constraintStart_toEndOf="@id/like"
-        app:layout_constraintTop_toTopOf="@id/like"
-        tools:text="@sample/posts.json/data/countLikes" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/share"
+        style="@style/Widget.AppTheme.ShareButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:background="@android:color/transparent"
         android:contentDescription="Share"
-        android:src="@drawable/share_svgrepo_com"
-        app:layout_constraintBottom_toBottomOf="@id/countLikes"
-        app:layout_constraintStart_toEndOf="@id/countLikes"
+        android:text="99"
+        app:icon="@drawable/share_svgrepo_com"
+        app:layout_constraintBottom_toBottomOf="@id/like"
+        app:layout_constraintStart_toEndOf="@id/like"
         app:layout_constraintTop_toBottomOf="@id/barrier_content"
-        app:layout_constraintTop_toTopOf="@id/countLikes"
+        app:layout_constraintTop_toTopOf="@id/like"
         app:tint="?attr/colorControlNormal" />
-
-    <TextView
-        android:id="@+id/countShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/share"
-        app:layout_constraintStart_toEndOf="@id/share"
-        app:layout_constraintTop_toTopOf="@id/share"
-        tools:text="@sample/posts.json/data/countShare" />
 
 
     <TextView

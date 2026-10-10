@@ -6,4 +6,26 @@
     </style>
 
     <style name="Theme.NMedia" parent="Base.Theme.NMedia" />
+
+    <style name="Widget.AppTheme.LikeButton" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="iconTint">@color/like_button_tint</item>
+        <item name="android:textColor">?attr/colorControlNormal</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="iconPadding">4dp</item>
+    </style>
+
+    <style name="Widget.AppTheme.ShareButton" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="android:textColor">?attr/colorControlNormal</item>
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="iconPadding">4dp</item>
+    </style>
+
+    <style name="Widget.AppTheme.MenuButton" parent="Widget.Material3.Button.TextButton.Icon">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="iconTint">?attr/colorControlNormal</item>
+    </style>
 </resources>

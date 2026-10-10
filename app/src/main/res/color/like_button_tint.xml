@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- checked → красный -->
+    <item
+        android:color="#FF0000"
+        android:state_checked="true" />
+
+    <!-- fallback → системный цвет -->
+    <item
+        android:color="?attr/colorControlNormal" />
+</selector>

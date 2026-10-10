@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- checked (лайкнут) → заполненное сердце -->
+    <item
+        android:drawable="@drawable/ic_like_filled_24"
+        android:state_checked="true" />
+
+    <!-- fallback (не лайкнут) → контур -->
+    <item
+        android:drawable="@drawable/ic_like_outlined_24" />
+</selector>
