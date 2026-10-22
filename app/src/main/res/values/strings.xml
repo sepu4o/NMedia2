@@ -14,4 +14,9 @@
     <string name="save">Save</string>
     <string name="cancel_edit">Cancel edit</string>
     <string name="post_text">Post text</string>
+    <string name="chooser_share_post">Share post</string>
+    <string name="error_empty_content">Error_empty_content</string>
+    <string name="new_post">New_Post</string>
+    <string name="video">Video</string>
+    <string name="play">Play</string>
 </resources>

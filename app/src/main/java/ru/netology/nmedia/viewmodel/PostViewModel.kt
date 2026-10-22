@@ -25,12 +25,9 @@ class PostViewModel : ViewModel() {
     fun removeById(id: Long) = repository.removeById(id)
 
     fun save(content: String) {
-        edited.value?.let { post ->
-            val trimmed = content.trim()
-            if (trimmed != post.content) {
-                repository.save(post.copy(content = trimmed))
-            }
-            edited.value = emptyPost
+        val trimmed = content.trim()
+        if (trimmed.isNotBlank()) {
+            repository.save(Post(content = trimmed))   // ← новый пост
         }
     }
 
@@ -40,5 +37,12 @@ class PostViewModel : ViewModel() {
 
     fun cancelEdit() {
         edited.value = emptyPost
+    }
+
+    fun update(id: Long, content: String) {
+        val trimmed = content.trim()
+        if (trimmed.isNotBlank()) {
+            repository.update(id, trimmed)
+        }
     }
 }

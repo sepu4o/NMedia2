@@ -1,5 +1,6 @@
 package ru.netology.nmedia.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -15,11 +16,25 @@ import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.util.AndroidUtils
 import ru.netology.nmedia.viewmodel.PostViewModel
+import androidx.activity.result.launch
 
 
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: PostViewModel by viewModels()
+
+    val postContract = registerForActivityResult(NewPostActivity.NewPostContract) { result ->
+        result ?: return@registerForActivityResult
+
+        if (result.id == 0L) {
+            // Создание нового поста
+            viewModel.save(result.text)
+        } else {
+            // Редактирование существующего
+            viewModel.update(result.id, result.text)
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -41,14 +57,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        // ==================== ADAPTER ====================
         val adapter = PostsAdapter(object : PostListener {
             override fun onlike(post: Post) {
                 viewModel.likeById(post.id)
             }
 
             override fun onEdit(post: Post) {
-                viewModel.edit(post)
+                postContract.launch(post)
             }
 
             override fun onRemove(post: Post) {
@@ -57,52 +72,28 @@ class MainActivity : AppCompatActivity() {
 
             override fun onShare(post: Post) {
                 viewModel.shareById(post.id)
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+                val chooser = Intent.createChooser(intent, getString(R.string.chooser_share_post))
+                startActivity(chooser)
+            }
+
+            override fun onShareToApp(post: Post) {
+                onShare(post)
             }
         })
 
         binding.list.adapter = adapter
-
-        // ==================== ПОДПИСКА НА СПИСОК ====================
         viewModel.data.observe(this) { posts ->
-            val isNewPost = posts.size > adapter.currentList.size
-            adapter.submitList(posts) {
-                if (isNewPost)
-                    binding.list.smoothScrollToPosition(0)
-            }
+            adapter.submitList(posts)
         }
 
-        // ==================== ПОДПИСКА НА РЕДАКТИРОВАНИЕ ====================
-        viewModel.edited.observe(this) { edited ->
-            if (edited.id != 0L) {
-                // Режим редактирования
-                binding.editingGroup.visibility = View.VISIBLE
-                binding.editingContent.text = edited.content
-                binding.content.setText(edited.content)
-                AndroidUtils.showKeyboard(binding.content)
-            } else {
-                // Обычный режим
-                binding.editingGroup.visibility = View.GONE
-                binding.content.setText("")
-                binding.content.clearFocus()
-                AndroidUtils.hideKeyboard(binding.content)
-            }
+        binding.add.setOnClickListener {
+            postContract.launch(null)
         }
 
-        // ==================== КНОПКА СОХРАНЕНИЯ ====================
-        binding.save.setOnClickListener {
-            val text = binding.content.text.toString()
-            if (text.isBlank()) {
-                Toast.makeText(this, R.string.error_empty_text, Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            viewModel.save(text)
-            // НЕ очищаем поле вручную — observer сделает это
-        }
-
-        // ==================== КНОПКА ОТМЕНЫ ====================
-        binding.cancelButton.setOnClickListener {
-            viewModel.cancelEdit()
-            // observer скроет панель и очистит поле
-        }
     }
 }

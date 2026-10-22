@@ -8,18 +8,25 @@ class PostRepositoryInMemory : PostRepository {
 
     private var nextId = 101L
 
-    private var posts = List(100) {
+    private var posts = List(100) { index ->
         Post(
-            id = it.toLong() + 1,
+            id = index.toLong() + 1,
             author = "Нетология. Университет интернет-профессий будущего",
             published = "21 мая в 18:36",
-            content = "$it Привет, это новая Нетология!...",
+            content = "$index Привет, это новая Нетология!...",
             likes = 999,
             likedByMe = false,
             share = 999,
-            view = 2500
+            view = 2500,
+            video = if (index % 2 == 0) {
+                "https://rutube.ru/video/6550a91e7e523f9503bed47e4c46d0cb"
+            } else {
+                null
+            }
         )
     }.reversed()
+
+
 
     private val data = MutableLiveData(posts)
 
@@ -75,6 +82,17 @@ class PostRepositoryInMemory : PostRepository {
                 } else {
                     it
                 }
+            }
+        }
+        data.value = posts
+    }
+
+    override fun update(id: Long, content: String) {
+        posts = posts.map { post ->
+            if (post.id == id) {
+                post.copy(content = content)
+            } else {
+                post
             }
         }
         data.value = posts

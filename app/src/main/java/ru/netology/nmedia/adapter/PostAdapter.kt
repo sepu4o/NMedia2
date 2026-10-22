@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
-
+import android.content.Intent
+import android.view.View
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import ru.netology.nmedia.R
 import ru.netology.nmedia.util.AndroidUtils
@@ -19,6 +21,7 @@ interface PostListener{
     fun onEdit(post:Post)
     fun onRemove(post:Post)
     fun onShare(post: Post)
+    fun onShareToApp(post: Post)
 }
 
 
@@ -51,11 +54,23 @@ class PostViewHolder(private val binding : CardPostBinding,
             like.isChecked = post.likedByMe
             like.text = AndroidUtils.formatCount(post.likes)
             share.text = AndroidUtils.formatCount(post.share)
+            //  показ/скрытие блока видео
+            if (post.video != null) {
+                videoBlock.visibility = View.VISIBLE
+                videoBlock.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, post.video.toUri())
+                    it.context.startActivity(intent)
+                }
+            } else {
+                videoBlock.visibility = View.GONE
+            }
+
             like.setOnClickListener {
                 listener.onlike(post)
             }
             share.setOnClickListener {
                 listener.onShare(post)
+                listener.onShareToApp(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
