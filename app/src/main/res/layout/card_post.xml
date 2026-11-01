@@ -6,8 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    tools:context=".activity.MainActivity">
-
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".fragment.FeedFragment">
 
     <ImageView
         android:id="@+id/avatar"
@@ -18,7 +19,6 @@
         app:layout_constraintBottom_toTopOf="@id/barrier_header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/author"
@@ -32,7 +32,6 @@
         app:layout_constraintTop_toTopOf="@id/avatar"
         app:layout_constraintVertical_chainStyle="packed"
         tools:text="@sample/posts.json/data/author" />
-
 
     <TextView
         android:id="@+id/published"
@@ -63,7 +62,6 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="avatar,published,menu" />
 
-
     <TextView
         android:id="@+id/content"
         android:layout_width="match_parent"
@@ -71,17 +69,8 @@
         android:layout_marginTop="20dp"
         android:autoLink="web"
         app:layout_constraintTop_toBottomOf="@id/barrier_header"
-        tools:layout_editor_absoluteX="-55dp"
         tools:text="@sample/posts.json/data/content" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="content" />
-
-    <!-- ==================== БЛОК ВИДЕО ==================== -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/videoBlock"
         android:layout_width="0dp"
@@ -90,9 +79,8 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/like">
+        app:layout_constraintTop_toBottomOf="@id/content">
 
-        <!-- Картинка-заглушка -->
         <ImageView
             android:id="@+id/videoThumbnail"
             android:layout_width="0dp"
@@ -105,7 +93,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Затемнение -->
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -115,7 +102,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Кнопка Play -->
         <ImageButton
             android:id="@+id/videoPlayButton"
             android:layout_width="64dp"
@@ -127,9 +113,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
@@ -143,9 +127,8 @@
         android:contentDescription="Like"
         app:icon="@drawable/ic_like_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier_content"
+        app:layout_constraintTop_toBottomOf="@id/videoBlock"
         app:tint="?attr/colorControlNormal" />
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/share"
@@ -159,10 +142,8 @@
         app:icon="@drawable/share_svgrepo_com"
         app:layout_constraintBottom_toBottomOf="@id/like"
         app:layout_constraintStart_toEndOf="@id/like"
-        app:layout_constraintTop_toBottomOf="@id/barrier_content"
         app:layout_constraintTop_toTopOf="@id/like"
         app:tint="?attr/colorControlNormal" />
-
 
     <TextView
         android:id="@+id/countView"
@@ -171,7 +152,7 @@
         android:layout_marginTop="@dimen/padding"
         android:layout_marginEnd="@dimen/padding"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/barrier_content"
+        app:layout_constraintTop_toBottomOf="@id/videoBlock"
         tools:text="@sample/posts.json/data/countView" />
 
     <ImageButton
@@ -186,6 +167,4 @@
         app:layout_constraintEnd_toStartOf="@id/countView"
         app:layout_constraintTop_toTopOf="@id/countView"
         app:tint="?attr/colorControlNormal"/>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,13 +10,12 @@ import ru.netology.nmedia.dto.Post
 
 
 class PostRepositoryFileImpl(private val context: Context) : PostRepository {
-    private val prefs = context.getSharedPreferences("data", Context.MODE_PRIVATE)
-    private var nextId = getId()
     private var posts: List<Post> = getPosts()
         set(value) {
             field = value
             sync()
         }
+    private var nextId = getId()
 
     private val data = MutableLiveData(posts)
 
@@ -106,8 +105,6 @@ class PostRepositoryFileImpl(private val context: Context) : PostRepository {
                 it.write(gson.toJson(posts))
             }
     }
-
-
     private companion object {
         const val FILE_NAME = "posts.json"
         val gson = Gson()

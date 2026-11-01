@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
@@ -21,7 +22,7 @@ interface PostListener{
     fun onEdit(post:Post)
     fun onRemove(post:Post)
     fun onShare(post: Post)
-    fun onShareToApp(post: Post)
+    fun onPostClick(post: Post)
 }
 
 
@@ -70,7 +71,10 @@ class PostViewHolder(private val binding : CardPostBinding,
             }
             share.setOnClickListener {
                 listener.onShare(post)
-                listener.onShareToApp(post)
+            }
+            binding.root.setOnClickListener {
+                Log.d("PostClick", "КЛИК СРАБОТАЛ! postId=${post.id}")   // ← лог
+                listener.onPostClick(post)
             }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
