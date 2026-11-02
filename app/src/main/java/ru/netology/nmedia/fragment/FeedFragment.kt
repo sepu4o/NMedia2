@@ -39,7 +39,9 @@ class FeedFragment : Fragment() {
             override fun onEdit(post: Post) {
                 findNavController().navigate(
                     R.id.action_feedFragment_to_newPostFragment,
-                    Bundle().apply { textArg = post.content } // передаём текст
+                    Bundle().apply {
+                        textArg = post.content
+                        putLong("postId", post.id) }
                 )
             }
 

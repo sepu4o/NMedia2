@@ -2,7 +2,6 @@ package ru.netology.nmedia.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,10 +79,14 @@ class PostDetailsFragment : Fragment() {
                             findNavController().navigateUp()
                             true
                         }
+
                         R.id.edit -> {
                             findNavController().navigate(
                                 R.id.action_postDetailsFragment_to_newPostFragment,
-                                Bundle().apply { textArg = post.content }
+                                Bundle().apply {
+                                    textArg = post.content
+                                    putLong("postId", post.id)
+                                }
                             )
                             true
                         }

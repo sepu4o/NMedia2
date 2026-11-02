@@ -21,15 +21,27 @@ class NewPostFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FragmentNewPostBinding.inflate(inflater, container, false)
-        arguments?.textArg?.let {
-            binding.edit.setText(it)
+
+        // ← Принимаем текст и id
+        val postText = arguments?.textArg
+        val postId = arguments?.getLong("postId", 0L) ?: 0L
+
+        // ← Если редактирование — заполняем поле
+        if (postText != null) {
+            binding.edit.setText(postText)
         }
 
+        // ← Кнопка OK
         binding.ok.setOnClickListener {
-            if (!binding.edit.text.isNullOrBlank()) {
-                viewModel.save(binding.edit.text.toString())
-                findNavController().navigateUp()
+            val content = binding.edit.text.toString()
+            if (content.isNotBlank()) {
+                if (postId == 0L) {
+                    viewModel.save(content)          // создание
+                } else {
+                    viewModel.update(postId, content) // редактирование
+                }
             }
+            findNavController().navigateUp()
         }
 
         return binding.root

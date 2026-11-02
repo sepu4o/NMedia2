@@ -28,16 +28,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun save(content: String) {
         val trimmed = content.trim()
         if (trimmed.isNotBlank()) {
-            repository.save(Post(content = trimmed))   // ← новый пост
+            repository.save(Post(content = trimmed))
         }
-    }
-
-    fun edit(post: Post) {
-        edited.value = post
-    }
-
-    fun cancelEdit() {
-        edited.value = emptyPost
     }
 
     fun update(id: Long, content: String) {
