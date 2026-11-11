@@ -64,7 +64,7 @@ class FCMService : FirebaseMessagingService() {
             .setContentTitle("${content.userName} поставил лайк посту ${content.postAuthor}")
             .setStyle(
                 NotificationCompat.BigTextStyle()
-                    .bigText(content.postContent ?: "Без текста")   // ← если добавишь в Like
+                    .bigText(content.postContent ?: "Без текста")
             )
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
