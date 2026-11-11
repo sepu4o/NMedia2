@@ -13,4 +13,5 @@
     <string name="new_post">Новый пост</string>
     <string name="video">Видео</string>
     <string name="play">Воспроизвести</string>
+    <string name="notification_user_liked">%1$s поставил лайк посту %2$s</string>
 </resources>
